@@ -1,0 +1,23 @@
+{
+  "name": "practical-collections",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "6.3.7",
+    "@astrojs/mdx": "5.0.6",
+    "@astrojs/sitemap": "3.7.2",
+    "sharp": "0.34.3"
+  },
+  "packageManager": "pnpm@11.0.8",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

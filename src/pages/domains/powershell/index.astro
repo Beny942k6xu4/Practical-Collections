@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const notes = await getCollection('notes', (n) => n.data.domain === 'PowerShell');
+const topics = [...new Set(notes.map((n) => n.data.topic).filter(Boolean))] as string[];
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title="PowerShell">
+  <h1>PowerShell</h1>
+  <p>PowerShell 領域入口。Cmdlet、參數、實作筆記。</p>
+
+  <h2>Topics</h2>
+  <ul>
+    {topics.map((t) => (
+      <li>
+        <a href={`${base}domains/powershell/${t.toLowerCase()}/`}>{t}</a>
+      </li>
+    ))}
+  </ul>
+
+  <h2>所有筆記</h2>
+  <ul>
+    {notes.map((n) => (
+      <li>
+        <a href={`${base}domains/${n.id.replace(/\.(md|mdx)$/, '')}/`}>{n.data.title}</a>
+        {n.data.description && <> — {n.data.description}</>}
+      </li>
+    ))}
+  </ul>
+
+  <h2>外部參考</h2>
+  <ul>
+    <li><a href="https://learn.microsoft.com/zh-tw/powershell/">Microsoft Learn — PowerShell</a></li>
+  </ul>
+</BaseLayout>

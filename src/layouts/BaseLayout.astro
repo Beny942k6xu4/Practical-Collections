@@ -1,0 +1,149 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'Practical Notes — Astro Content Collections' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={base}>Practical Notes <small>(Collections)</small></a>
+      <nav>
+        <a href={`${base}domains/powershell/`}>PowerShell</a>
+        <a href={`${base}meta/principles/`}>原則</a>
+        <a href="https://github.com/Beny942k6xu4/Practical-Collections">GitHub</a>
+      </nav>
+    </header>
+    <main class="container">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>
+        Source of truth：
+        <a href="https://Beny942k6xu4.github.io/Practical-Starlight/">Practical-Starlight</a>。
+        本站為 Astro Content Collections 對照實作。
+      </p>
+    </footer>
+
+    <style is:global>
+      :root {
+        --fg: #1f2328;
+        --muted: #57606a;
+        --bg: #ffffff;
+        --bg-alt: #f6f8fa;
+        --border: #d0d7de;
+        --accent: #0969da;
+        --accent-bg: #ddf4ff;
+        --code-bg: #f6f8fa;
+        --max: 920px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC',
+          system-ui, sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --fg: #e6edf3;
+          --muted: #8b949e;
+          --bg: #0d1117;
+          --bg-alt: #161b22;
+          --border: #30363d;
+          --accent: #2f81f7;
+          --accent-bg: #0c2d6b;
+          --code-bg: #161b22;
+        }
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        padding: 0;
+        color: var(--fg);
+        background: var(--bg);
+        line-height: 1.6;
+      }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 1.4rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--bg-alt);
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .brand { font-weight: 700; color: var(--fg); }
+      .brand small { font-weight: 400; color: var(--muted); }
+      .site-header nav { display: flex; gap: 1rem; flex-wrap: wrap; }
+      .container {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 2rem 1.4rem 4rem;
+      }
+      h1 { margin-top: 0; }
+      h1, h2, h3 { line-height: 1.25; }
+      h2 { margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+      pre {
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0.8rem 1rem;
+        overflow-x: auto;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, 'Cascadia Code', 'Source Code Pro', monospace;
+        font-size: 0.92em;
+      }
+      :not(pre) > code {
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 0.1em 0.35em;
+      }
+      table {
+        border-collapse: collapse;
+        margin: 1rem 0;
+        width: 100%;
+      }
+      th, td {
+        border: 1px solid var(--border);
+        padding: 0.4rem 0.7rem;
+        text-align: left;
+        vertical-align: top;
+      }
+      th { background: var(--bg-alt); }
+      blockquote {
+        border-left: 3px solid var(--border);
+        margin: 1rem 0;
+        padding: 0.2rem 1rem;
+        color: var(--muted);
+      }
+      .meta-pill {
+        display: inline-block;
+        font-size: 0.75rem;
+        padding: 0.15em 0.55em;
+        border-radius: 999px;
+        background: var(--accent-bg);
+        color: var(--accent);
+        margin-right: 0.4em;
+      }
+      .site-footer {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 1.5rem 1.4rem 3rem;
+        color: var(--muted);
+        font-size: 0.9em;
+        border-top: 1px solid var(--border);
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getCollection, type CollectionEntry, render } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'notes'>;
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+const base = import.meta.env.BASE_URL;
+
+// 解析 related slugs -> 真實 entries
+const all = await getCollection('notes');
+const relatedEntries = data.related
+  .map((slug) => all.find((n) => n.id === slug || n.id === `${slug}.md` || n.id === `${slug}.mdx`))
+  .filter((x): x is CollectionEntry<'notes'> => Boolean(x));
+---
+<BaseLayout title={`${data.title} — Practical Notes`} description={data.description}>
+  <article>
+    <p>
+      <span class="meta-pill">{data.domain}</span>
+      {data.topic && <span class="meta-pill">{data.topic}</span>}
+      {data.concept && <span class="meta-pill">{data.concept}</span>}
+      <span class="meta-pill">status: {data.status}</span>
+    </p>
+    <h1>{data.title}</h1>
+    {data.description && <p><em>{data.description}</em></p>}
+
+    <Content />
+
+    {relatedEntries.length > 0 && (
+      <section>
+        <h2>Related</h2>
+        <ul>
+          {relatedEntries.map((r) => (
+            <li>
+              <a href={`${base}domains/${r.id.replace(/\.(md|mdx)$/, '')}/`}>{r.data.title}</a>
+              {r.data.description && <> — {r.data.description}</>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {data.externalReferences.length > 0 && (
+      <section>
+        <h2>External references</h2>
+        <ul>
+          {data.externalReferences.map((ref) => (
+            <li><a href={ref.url} rel="noopener noreferrer">{ref.label}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
+</BaseLayout>

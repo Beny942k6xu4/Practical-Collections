@@ -1,0 +1,19 @@
+---
+import NoteLayout from '../../layouts/NoteLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return notes.map((entry) => ({
+    // entry.id 例如 "powershell/rename-item/path"
+    params: { slug: entry.id.replace(/\.(md|mdx)$/, '') },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'notes'>;
+}
+const { entry } = Astro.props;
+---
+<NoteLayout entry={entry} />

@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const notes = await getCollection(
+  'notes',
+  (n) => n.data.domain === 'PowerShell' && n.data.topic === 'Rename-Item'
+);
+notes.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title="Rename-Item">
+  <h1>Rename-Item</h1>
+  <p>PowerShell <code>Microsoft.PowerShell.Management</code> 模組的命名 Cmdlet。本質是「同位置改名」。</p>
+
+  <h2>本 topic 已收錄的 notes</h2>
+  <ul>
+    {notes.map((n) => (
+      <li>
+        <a href={`${base}domains/${n.id.replace(/\.(md|mdx)$/, '')}/`}>{n.data.title}</a>
+        {n.data.description && <> — {n.data.description}</>}
+      </li>
+    ))}
+  </ul>
+
+  <p>
+    完整參數對照與規劃中參數請見
+    <a href="https://Beny942k6xu4.github.io/Practical-Starlight/domains/powershell/rename-item/">
+      Practical-Starlight 的 Rename-Item 主題總覽</a>。
+  </p>
+</BaseLayout>
