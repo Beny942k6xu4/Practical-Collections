@@ -1,10 +1,12 @@
 ---
 title: Rename-Item -Path
 description: 指定要被重新命名的舊項目；Rename-Item 的核心輸入。
-domain: PowerShell
-topic: Rename-Item
+domain: Server
+subdomain: PowerShell
+topic: basic-learn
+skill: rename
 concept: Path
-tags: [powershell, rename-item, parameter]
+tags: [server, powershell, rename, parameter]
 status: stable
 order: 1
 related: []

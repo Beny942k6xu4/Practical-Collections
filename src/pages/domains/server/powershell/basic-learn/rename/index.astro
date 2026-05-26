@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../../../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const notes = await getCollection(
+  'notes',
+  (n) =>
+    n.data.domain === 'Server' &&
+    n.data.subdomain === 'PowerShell' &&
+    n.data.topic === 'basic-learn' &&
+    n.data.skill === 'rename'
+);
+notes.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title="rename (skill)" description="basic-learn 主題下的 rename 能力。">
+  <p>
+    <span class="meta-pill">skill: rename</span>
+  </p>
+  <h1>rename</h1>
+  <p>
+    在 PowerShell 中改名的能力。以 <code>Rename-Item</code> 為核心，
+    搭配 <code>Get-ChildItem</code> 與 pipeline 完成單筆改名、批次改名、副檔名轉換等任務。
+  </p>
+
+  <h2>包含的 concepts</h2>
+  <ul>
+    {notes.map((n) => (
+      <li>
+        <a href={`${base}domains/${n.id.replace(/\.(md|mdx)$/, '')}/`}>
+          {n.data.concept ? `${n.data.concept} — ` : ''}{n.data.title}
+        </a>
+        {n.data.description && <> — {n.data.description}</>}
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

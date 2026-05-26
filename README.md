@@ -25,15 +25,15 @@ pnpm preview
 
 ## 與 Practical-Starlight 的差異
 
-| 面向 | Practical-Starlight | Practical-Collections（本專案） |
-|---|---|---|
-| 是否使用 Starlight | ✅ | ❌（純 Astro） |
-| sidebar | 寫在 `astro.config.mjs` | 目前用頂部 nav，可擴充 |
-| frontmatter schema | Starlight 內建 | 自定 Zod schema（domain/topic/status/related/...） |
-| 內部連結 | 相對 markdown 路徑 | frontmatter `related` 陣列 + layout 渲染 |
-| 路由 | Starlight 自動產生 | `getStaticPaths` + `[...slug].astro` 動態產生 |
-| 客製 UI 工作量 | 低 | 中（需要寫 layout、styles） |
-| 學 Astro 程度 | 低 | 高 |
+| 面向               | Practical-Starlight     | Practical-Collections（本專案）                    |
+| ------------------ | ----------------------- | -------------------------------------------------- |
+| 是否使用 Starlight | ✅                      | ❌（純 Astro）                                     |
+| sidebar            | 寫在 `astro.config.mjs` | 目前用頂部 nav，可擴充                             |
+| frontmatter schema | Starlight 內建          | 自定 Zod schema（domain/topic/status/related/...） |
+| 內部連結           | 相對 markdown 路徑      | frontmatter `related` 陣列 + layout 渲染           |
+| 路由               | Starlight 自動產生      | `getStaticPaths` + `[...slug].astro` 動態產生      |
+| 客製 UI 工作量     | 低                      | 中（需要寫 layout、styles）                        |
+| 學 Astro 程度      | 低                      | 高                                                 |
 
 ---
 

@@ -1,5 +1,5 @@
-import { defineCollection, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 /**
  * notes collection
@@ -12,7 +12,7 @@ import { glob } from 'astro/loaders';
  *     -> slug: "powershell/rename-item/path"
  */
 const notes = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/notes' }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/notes" }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -25,7 +25,7 @@ const notes = defineCollection({
     skill: z.string().optional(),
 
     tags: z.array(z.string()).default([]),
-    status: z.enum(['draft', 'review', 'stable']).default('draft'),
+    status: z.enum(["draft", "review", "stable"]).default("draft"),
 
     // 同 topic 內排序（小到大）
     order: z.number().optional(),
@@ -39,7 +39,7 @@ const notes = defineCollection({
         z.object({
           label: z.string(),
           url: z.string().url(),
-        })
+        }),
       )
       .default([]),
   }),

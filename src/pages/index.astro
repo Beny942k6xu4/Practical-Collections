@@ -5,6 +5,7 @@ import { getCollection } from 'astro:content';
 const notes = await getCollection('notes');
 const domains = [...new Set(notes.map((n) => n.data.domain))].sort();
 const base = import.meta.env.BASE_URL;
+const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, '-');
 ---
 <BaseLayout title="Practical Notes (Collections)">
   <h1>Practical Notes <small>(Collections)</small></h1>
@@ -15,17 +16,17 @@ const base = import.meta.env.BASE_URL;
 
   <h2>邏輯模型</h2>
   <pre><code>{`Meta (Study root)
- └── Domain
-      └── Subdomain (optional)
-           └── Topic
-                └── Concept
-                     └── Skill`}</code></pre>
-  <p>詳見 <a href={`${base}meta/principles/`}>知識組織原則</a>。</p>
+ └── Domain        (e.g. Server)
+      └── Subdomain  (e.g. PowerShell)
+           └── Topic     (e.g. basic-learn)
+                └── Skill     (e.g. rename)
+                     └── Concept   (e.g. Path)`}</code></pre>
+  <p>結構是邏輯的，不是物理的。詳見 <a href={`${base}meta/principles/`}>知識組織原則</a>。</p>
 
   <h2>Domains</h2>
   <ul>
     {domains.map((d) => (
-      <li><a href={`${base}domains/${d.toLowerCase()}/`}>{d}</a></li>
+      <li><a href={`${base}domains/${toSlug(d)}/`}>{d}</a></li>
     ))}
   </ul>
 

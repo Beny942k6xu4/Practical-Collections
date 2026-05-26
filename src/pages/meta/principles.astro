@@ -1,17 +1,20 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
+
 <BaseLayout title="知識組織原則">
   <h1>知識組織原則</h1>
-  <p>本站採用 <strong>Domain → Subdomain → Topic → Concept → Skill</strong> 的邏輯模型。</p>
+  <p>
+    本站採用 <strong>Domain → Subdomain → Topic → Concept → Skill</strong> 的邏輯模型。
+  </p>
 
   <h2>五層</h2>
   <ul>
-    <li><strong>Domain</strong>：成熟、邊界清楚的大領域。</li>
-    <li><strong>Subdomain</strong>：可選；領域內的分區。</li>
-    <li><strong>Topic</strong>：核心單位；新興內容先放這層。</li>
-    <li><strong>Concept</strong>：原子知識，一頁一觀念。</li>
-    <li><strong>Skill</strong>：能力層，由概念實作累積而來。</li>
+    <li><strong>Domain</strong>：成熟、邊界清楚的大領域。例：Server。</li>
+    <li><strong>Subdomain</strong>：領域內的分區。例：Server 下的 PowerShell。</li>
+    <li><strong>Topic</strong>：核心單位；新興內容先放這層。例：basic-learn。</li>
+    <li><strong>Skill</strong>：實際可練的能力。例：rename。</li>
+    <li><strong>Concept</strong>：原子知識，一頁一觀念。例：rename 下的 Path 參數。</li>
   </ul>
 
   <h2>演化流程</h2>
@@ -25,8 +28,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <h2>本實作的特殊性</h2>
   <p>
     本專案以 Astro Content Collections 從零搭建，schema 強制每篇 note 提供
-    <code>domain</code>、<code>status</code>、可選的 <code>topic</code> / <code>concept</code>，
-    並用 <code>related</code> 陣列建立內部交叉連結。
+    <code>domain</code>、<code>status</code>、可選的 <code>topic</code> / <code
+      >concept</code
+    >， 並用 <code>related</code> 陣列建立內部交叉連結。
   </p>
-  <p>正式維護版位於 <a href="https://Beny942k6xu4.github.io/Practical-Starlight/">Practical-Starlight</a>。</p>
+  <p>
+    正式維護版位於 <a href="https://Beny942k6xu4.github.io/Practical-Starlight/"
+      >Practical-Starlight</a
+    >。
+  </p>
 </BaseLayout>
